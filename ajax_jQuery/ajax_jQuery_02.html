@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../template-native.js"></script>
+    <script src="../jquery.min.js"></script>
+</head>
+<body>
+<input type="button" value="123">
+</body>
+<script type = text/template>
+    <ul>
+        <% for(var i = 0; i < obj.length; i++){ %>
+            <li><%= 1%></li>
+
+        <%}%>
+    </ul>
+</script>
+<script>
+    $(function () {
+        var obj = {
+            name:"fox",
+            age:18,
+            skill:"卖萌"
+        };
+        $("button").on("click",function () {
+
+        })
+    })
+
+</script>
+</html>
