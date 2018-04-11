@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	.box {
+		width: 800px;
+		height: 500px;
+		border:1px solid;
+		margin: 0 auto;
+	}
+	.mess {
+		width: 800px;
+		height: 400px;
+		background: #0cacff;
+		overflow: scroll;
+	}
+	.send {
+		width: 800px;
+		height: 100px;
+	}
+	input[type=text] {
+		height: 84px;
+		width: 580px;
+		padding: 5px;
+		font-size: 30px;
+	}
+	input[type=submit] {
+		height: 96px;
+		width: 200px;
+		padding: 5px;
+		font-size: 30px;
+	}
+	.self {
+		width: 790px;
+		padding: 5px;
+		background: red;
+		border:3px green;
+		text-align: right;
+	}
+	.other {
+		width: 790px;
+		padding: 5px;
+		background: white;
+		border:3px gray;
+		text-align: left;
+	}
+</style>
+<body>
+	<div class="box">
+		<div class="mess" id="mess"></div>
+		<div class="send">
+			<input type="text" id="messText">
+			<input type="submit" id="btn">
+		</div>
+	</div>
+</body>
+</html>
+<script>
+var btn = document.querySelector("#btn");
+var mess = document.querySelector("#mess");
+var messText = document.querySelector("#messText");
+
+btn.onclick = function(){
+	console.log(messText.value);
+
+	var div = document.createElement("div");
+	div.className = "self";
+	div.innerHTML = messText.value;
+
+	var ajax = new XMLHttpRequest();
+
+	ajax.open('post','talking.php');
+
+	ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+	ajax.send("value="+messText.value);
+
+	mess.appendChild(div);
+
+	ajax.onreadystatechange = function(){
+		if(ajax.readyState == 4 && ajax.status == 200){
+			var newDiv = document.createElement("div");
+			newDiv.className = "other";
+			newDiv.innerHTML = ajax.responseText;
+			mess.appendChild(newDiv);
+		}
+	}
+
+
+	
+}
+
+</script>
